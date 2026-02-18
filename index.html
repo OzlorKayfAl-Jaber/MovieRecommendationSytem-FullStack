@@ -5,24 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Day 2 - Movie Guide App - Oz</title>
+    <title>Movie Guide App</title>
 </head>
+
 <body>
-    
+    <header>
+        <h1>🎬 Movie Guide App</h1>
+        <p>Search for any movie and get details instantly!</p>
+    </header>
 
+    <main class="container">
+        <section class="search-container">
+            <input type="text" id="movie-name" placeholder="Enter movie name..." value="Wednesday">
+            <button id="search-btn">Search</button>
+        </section>
 
-<div class="container">
-    <div class="seacrh-container">
-        <input type="text" id="movie-name" placeholder="Enter movie name..." value="Wednesday">
-        <button id="search-btn">Search</button>
-    </div>
-    <div id="result"></div>
-</div>
+        <section id="result"></section>
+    </main>
 
+    <footer>
+        <p>Powered by <a href="https://www.omdbapi.com/" target="_blank">OMDb API</a></p>
+    </footer>
 
-
-<script src="key.js"></script>
-<script src="index.js"></script>
-
+    <script src="key.js"></script>
+    <script src="index.js"></script>
 </body>
+
 </html>

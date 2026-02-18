@@ -1,61 +1,37 @@
-let MovieNameRef = document.getElementById("movie-name");
-let searchBtn = document.getElementById("search-btn");
-let result = document.getElementById("result");
+const MovieNameRef=document.getElementById("movie-name");
+const searchBtn=document.getElementById("search-btn");
+const result=document.getElementById("result");
 
-// Function to fetch movie details from the API
-let getMovie = () => {
-    let movieName = MovieNameRef.value;
-    let url ='https://www.omdbapi.com/?t=' + movieName + '&apikey=' + key;
+// Function to fetch movie details from OMDb API
+const getMovie=async ()=> {
+    const movieName=MovieNameRef.value.trim();
 
-    // If input field is empty
-    if (movieName.length <= 0) {
-        result.innerHTML = '<h3 class="msg">Please enter a movie name</h3>';
+    if ( !movieName) {
+        result.innerHTML='<h3 class="msg">Please enter a movie name</h3>';
+        return;
     }
 
+const url=`https://www.omdbapi.com/?t=${encodeURIComponent(movieName)}&apikey=${key}`;
 
-    // If input field is not empty
-    else {
-        fetch(url).then((resp) => resp.json()).then((data) => {
-            // If movie exists in database
-            if (data.Response == "True") {
-                result.innerHTML = `
-                <div class="info">
-                    <img src=${data.Poster} class="poster">
-                    <div>
-                        <h2>${data.Title}</h2>
-                        <div class="rating">
-                            <img src="star-icon.svg">
-                            <h4>${data.imdbRating}</h4>
-                        </div>
-                        <div class="details">
-                            <span>${data.Rated}</span>
-                            <span>${data.Year}</span>
-                            <span>${data.Runtime}</span>
-                        </div>
-                        <div class="genre">
-                            <div>${data.Genre.split(",").join("</div><div>")}</div>
-                        </div>
-                    </div>
-                </div>
-                <h3>Plot:</h3>
-                <p>${data.Plot}</p>
-                <h3>Cast:</h3>
-                <p>${data.Actors}</p>
-                </div>
-                `;
-            }
-            // If movie does not exist in database
-            else {
-                result.innerHTML = `<h3 class="msg">${data.Error}</h3>`;
-            }
-        })
-        // if error occurs
-        .catch(() => {
-            result.innerHTML = `<h3 class="msg">Error Occurred</h3>`;
-        });
+    try {
+        const response=await fetch(url);
+        const data=await response.json();
+
+        if (data.Response==="True") {
+            result.innerHTML=` <div class="info"><img src="${data.Poster}"alt="${data.Title} Poster"class="poster"><div class="movie-details"><h2>${data.Title}</h2><div class="rating"><img src="star-icon.svg"alt="Rating"><h4>${data.imdbRating}</h4></div><div class="details"><span>${data.Rated}</span><span>${data.Year}</span><span>${data.Runtime}</span></div><div class="genres">${data.Genre.split(",").map(g=> `<div class="genre">${g.trim()}</div>`).join('')}</div></div></div><h3>Plot:</h3><p>${data.Plot}</p><h3>Cast:</h3><p>${data.Actors}</p>`;
+        }
+
+        else {
+            result.innerHTML=`<h3 class="msg">${data.Error}</h3>`;
+        }
     }
-};
 
+    catch (error) {
+        result.innerHTML='<h3 class="msg">Error fetching movie data. Please try again later.</h3>';
+        console.error(error);
+    }
+}
+
+// Event listeners
 searchBtn.addEventListener("click", getMovie);
 window.addEventListener("load", getMovie);
-
