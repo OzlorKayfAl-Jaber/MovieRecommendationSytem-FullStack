@@ -1,34 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Movie Guide App</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Guide App</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <header>
-        <h1>🎬 Movie Guide App</h1>
-        <p>Search for any movie and get details instantly!</p>
-    </header>
 
-    <main class="container">
-        <section class="search-container">
-            <input type="text" id="movie-name" placeholder="Enter movie name..." value="Wednesday">
-            <button id="search-btn">Search</button>
-        </section>
+<header>
+<h1>🎬 Movie Guide App</h1>
+<p>Developed by Oz</p>
+</header>
 
-        <section id="result"></section>
-    </main>
+<main class="container">
+<div class="search-container">
+<input id="movie-name" placeholder="Enter movie name">
+<button id="search-btn">Search</button>
+</div>
 
-    <footer>
-        <p>Powered by <a href="https://www.omdbapi.com/" target="_blank">OMDb API</a></p>
-    </footer>
+<div id="result"></div>
+<div id="recommendations"></div>
+</main>
 
-    <script src="key.js"></script>
-    <script src="index.js"></script>
+<script src="key.js"></script>
+<script src="index.js"></script>
 </body>
-
 </html>

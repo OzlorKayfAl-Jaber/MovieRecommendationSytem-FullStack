@@ -1,2 +1,1 @@
-// Enter api key that recieved
-key="ffbed9a";
+const key = "ffbed9a"
